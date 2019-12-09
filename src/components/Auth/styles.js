@@ -26,9 +26,6 @@ const El = styled.div`
     background: #fff;
     border-radius: 50%;
   }
-  svg{
-    margin-bottom: 4px;
-  }
 `
 
 const Wrapper = ({children}) => <El>{children}</El>

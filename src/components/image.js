@@ -2,7 +2,7 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
-const Image = ({ imgName }) => {
+const Image = ({ imgName, className }) => {
   const data = useStaticQuery(graphql`
     query {
       allImageSharp {
@@ -27,6 +27,7 @@ const Image = ({ imgName }) => {
 
   return (
     <Img
+      className={className}
       fluid={image.node.fluid}
       style={{ position: "relative", overflow: "hidden" }}
       objectFit="cover"
