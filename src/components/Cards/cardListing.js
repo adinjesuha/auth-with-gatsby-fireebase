@@ -38,8 +38,8 @@ const CardListing = () => {
   return (
     <Row>
       {fakeData.map(data => (
-        <Col sm="12" lg="4" className="mb-4">
-          <Card cardData={data} key={data.index}/>
+        <Col sm="12" lg="4" className="mb-4" key={data.index}>
+          <Card cardData={data}/>
         </Col>
         )
       )}

@@ -5,37 +5,43 @@ import { MdModeEdit, MdDelete, MdFavorite } from 'react-icons/md'
 
 import Image from '../image'
 
-const ImageCard = styled.div`
-  width: 100%;
-  height: 200px;
-  overflow: hidden;  
-  border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem;
-`
-
-const CustomFooterCard = styled(CardFooter)`
-  background-color: transparent !important;
-  padding: 0 !important;
-  .actions-group{
-    display: flex;
-    button{
-      font-size: 14px;
-      width: 100%;
-      border-radius: 0;
-      flex-grow: 1;
-      line-height: 2.2;
-      color: #525f80;
-      &:first-child{
-        border-bottom-left-radius: .25rem;
-        border-right: 1px solid rgba(0,0,0,.125);
-      }
-      &:last-child{
-        border-bottom-right-radius: .25rem;
-        border-left: 1px solid rgba(0,0,0,.125);
-      }
-      svg{
-        color: inherit;
-        margin-bottom: 4px;
+const Wrapper = styled(Card)`
+  .image-card{
+    width: 100%;
+    height: 200px;
+    overflow: hidden;  
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+  }
+  .card-body{
+    .card-text{
+      color: #9ea0a5;
+    }
+  }
+  .card-footer{
+    background-color: transparent;
+    padding: 0;
+    .actions-group{
+      display: flex;
+      button{
+        font-size: 14px;
+        width: 100%;
+        border-radius: 0;
+        flex-grow: 1;
+        line-height: 2.2;
+        color: #525f80;
+        &:first-child{
+          border-bottom-left-radius: .25rem;
+          border-right: 1px solid rgba(0,0,0,.125);
+        }
+        &:last-child{
+          border-bottom-right-radius: .25rem;
+          border-left: 1px solid rgba(0,0,0,.125);
+        }
+        svg{
+          color: inherit;
+          margin-bottom: 4px;
+        }
       }
     }
   }
@@ -44,10 +50,10 @@ const CustomFooterCard = styled(CardFooter)`
 const CardEl = ({cardData}) => {
   const {title, content, image, updated} = cardData
   return (
-    <Card>
-      <ImageCard>
+    <Wrapper>
+      <div className="image-card">
         <Image imgName={image}/>
-      </ImageCard>
+      </div>
       <CardBody>
         <h4 className="card-title font-16 mt-0">{title}</h4>
         <p className="card-text">{content}</p>
@@ -55,7 +61,7 @@ const CardEl = ({cardData}) => {
           <small className="text-muted">{updated}</small>
         </p>
       </CardBody>
-      <CustomFooterCard>
+      <CardFooter>
         <div className="actions-group">
           <Button color="transparent">
             <MdModeEdit /> Edit
@@ -67,8 +73,8 @@ const CardEl = ({cardData}) => {
             <MdDelete /> Delete
           </Button>
         </div>
-      </CustomFooterCard>
-    </Card>
+      </CardFooter>
+    </Wrapper>
   )
 }
 

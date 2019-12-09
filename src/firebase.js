@@ -1,14 +1,13 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCEzlD-Ugrs_8XR6d_N0PZwwUdpGJTVZpE",
-  authDomain: "gatsby-firebase-redux.firebaseapp.com",
-  databaseURL: "https://gatsby-firebase-redux.firebaseio.com",
-  projectId: "gatsby-firebase-redux",
-  storageBucket: "gatsby-firebase-redux.appspot.com",
-  messagingSenderId: "799298956135",
-  appId: "1:799298956135:web:177d7ebfac8937b9961dc2",
-  measurementId: "G-PKD77CVQJ8"
+  apiKey: process.env.GATSBY_FIREBASE_API_KEY,
+  authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.GATSBY_DATABASE_URL,
+  projectId: process.env.GATSBY_PROJECT_ID,
+  storageBucket: process.env.GATSBY_STORAGE_BUCKET,
+  appId: process.env.GATSBY_APP_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
