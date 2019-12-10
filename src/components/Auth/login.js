@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { Alert, Button, Col, Row, Card } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { useFirebase } from 'react-redux-firebase'
 
 import Image from '../image'
 import { MdFavorite, MdHttps } from "react-icons/md";
@@ -13,6 +14,7 @@ const Login = () =>  {
     password: ""
   })
   const [error, setError] = useState(null)
+  const firebase = useFirebase()
 
   const handleChange = e => {
     setUser({
@@ -23,7 +25,13 @@ const Login = () =>  {
   
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(user);
+    const {email, password} = user
+    firebase.auth().signInWithEmailAndPassword(email, password).then(res => {
+      console.log(res)
+      navigate(`/app/dashboard`, { replace: true })
+    }).catch(err => {
+      setError(err.message)
+    })
   }
   return (
     <Wrapper>

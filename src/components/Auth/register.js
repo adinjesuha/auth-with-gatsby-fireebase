@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import { Alert, Button, Col, Row, Card } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
+import { useFirebase, useFirestore } from 'react-redux-firebase'
 
 import Image from '../image'
 import { MdFavorite } from "react-icons/md";
@@ -15,6 +16,8 @@ const Register = () =>  {
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const firebase = useFirebase()
+  const firestore = useFirestore()
 
   const handleChange = e => {
     setUser({
@@ -25,7 +28,23 @@ const Register = () =>  {
   
   const handleSubmit = e => {
     e.preventDefault()
-    console.log(user);
+    const {username, email, password} = user
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(res => {
+        return firestore
+          .collection('users')
+          .doc(res.user.uid)
+          .set({
+            username
+          })
+      })
+      .then(res =>{
+        console.log(res)
+        navigate(`/app/dashboard`, { replace: true })
+      })
+      .catch(err => {
+        setError(err.message)
+      })
   }
   return (
     <React.Fragment>
@@ -42,7 +61,6 @@ const Register = () =>  {
             {user.username && user.email && user.password && <Alert color="success">Registration Done Successfully.</Alert>}
             {error && <Alert color="danger">{error}</Alert>}
             <AvForm className="form-horizontal" onSubmit={handleSubmit}>
-
               <AvField 
                 name="username" 
                 label="Username" 
