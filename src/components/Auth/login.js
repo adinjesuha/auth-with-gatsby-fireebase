@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import { Link, navigate } from 'gatsby';
 import { Alert, Button, Col, Row, Card } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { useFirebase } from 'react-redux-firebase'
+import { connect } from "react-redux"
+
+import { signIn } from '../../store/actions/auth' 
 
 import Image from '../image'
 import { MdFavorite, MdHttps } from "react-icons/md";
 import Wrapper from './styles'
 
-const Login = () =>  {
+const Login = ({auth, authError, signIn}) =>  {
   const [user, setUser] = useState({
     email: "",
     password: ""
   })
-  const [error, setError] = useState(null)
-  const firebase = useFirebase()
 
   const handleChange = e => {
     setUser({
@@ -25,13 +25,11 @@ const Login = () =>  {
   
   const handleSubmit = e => {
     e.preventDefault()
-    const {email, password} = user
-    firebase.auth().signInWithEmailAndPassword(email, password).then(res => {
-      console.log(res)
-      navigate(`/app/dashboard`, { replace: true })
-    }).catch(err => {
-      setError(err.message)
-    })
+    signIn(user)
+  }
+  if (auth.uid) {
+    navigate("/app/dashboard", { replace: true })
+    return null
   }
   return (
     <Wrapper>
@@ -44,8 +42,7 @@ const Login = () =>  {
           </Link>
         </div>
         <div className="account-card__content">
-          {user.email && user.password && <Alert color="success">Your Login is successfull.</Alert>}
-          {error && <Alert color="danger">{error}</Alert>}
+          {authError && <Alert color="danger">{authError}</Alert>}
           <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit} >
             <AvField 
               name="email" 
@@ -92,7 +89,23 @@ const Login = () =>  {
   )
 }
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: creds => dispatch(signIn(creds)),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)
 
 
 

@@ -1,36 +1,30 @@
-import { useFirebase } from 'react-redux-firebase'
+import { 
+  SIGNIN_SUCCESS, 
+  SIGNIN_ERROR, 
+  SIGNUP_SUCCESS, 
+  SIGNUP_ERROR,
+  SIGNOUT_SUCCESS
+} from "./actionTypes";
 
 export const signIn = credentials => {
-  return (dispatch, getState ) => {
-    const firebase = useFirebase()
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase()
     firebase
       .auth()
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(() => {
-        dispatch({ type: "LOGIN_SUCCESS" })
+        dispatch({ type: SIGNIN_SUCCESS })
       })
       .catch(err => {
-        dispatch({ type: "LOGIN_ERROR", err })
-      })
-  }
-}
-
-export const signOut = () => {
-  return (dispatch, getState, { getFirebase }) => {
-    const firebase = getFirebase()
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        dispatch({ type: "SIGNOUT_SUCCESS" })
+        dispatch({ type: SIGNIN_ERROR, err })
       })
   }
 }
 
 export const signUp = newUser => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
+  return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase()
-    const firestore = getFirestore()
+    const firestore = firebase.firestore()
     firebase
       .auth()
       .createUserWithEmailAndPassword(newUser.email, newUser.password)
@@ -39,16 +33,26 @@ export const signUp = newUser => {
           .collection("users")
           .doc(res.user.uid)
           .set({
-            firstName: newUser.firstName,
-            lastName: newUser.lastName,
-            initials: newUser.firstName[0] + newUser.lastName[0],
+            username: newUser.username,
           })
       })
       .then(() => {
-        dispatch({ type: "SIGNUP_SUCCESS" })
+        dispatch({ type: SIGNUP_SUCCESS })
       })
       .catch(err => {
-        dispatch({ type: "SIGNUP_ERROR", err })
+        dispatch({ type: SIGNUP_ERROR, err })
+      })
+  }
+}
+
+export const signOut = () => {
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase()
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        dispatch({ type: SIGNOUT_SUCCESS })
       })
   }
 }

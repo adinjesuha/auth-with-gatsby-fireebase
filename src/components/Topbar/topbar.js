@@ -60,7 +60,7 @@ const Topbar = () => {
         </Link>
       </div>
       <nav className="topbar-right">
-        <div></div>
+        <div></div> 
         <ul>
           <SearchMenu />
           <NotificationMenu />

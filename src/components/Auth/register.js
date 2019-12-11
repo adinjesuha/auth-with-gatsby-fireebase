@@ -2,22 +2,20 @@ import React, { useState } from 'react';
 import { Link, navigate } from 'gatsby';
 import { Alert, Button, Col, Row, Card } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
-import { useFirebase, useFirestore } from 'react-redux-firebase'
+import { connect } from "react-redux"
 
+import { signUp } from "../../store/actions/auth"
 import Image from '../image'
 import { MdFavorite } from "react-icons/md";
 import Wrapper from './styles'
 
-const Register = () =>  {
+const Register = ({auth, authError, signUp}) =>  {
   const [user, setUser] = useState({
     username: null,
     email: null,
     password: null,
   })
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const firebase = useFirebase()
-  const firestore = useFirestore()
 
   const handleChange = e => {
     setUser({
@@ -28,23 +26,11 @@ const Register = () =>  {
   
   const handleSubmit = e => {
     e.preventDefault()
-    const {username, email, password} = user
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(res => {
-        return firestore
-          .collection('users')
-          .doc(res.user.uid)
-          .set({
-            username
-          })
-      })
-      .then(res =>{
-        console.log(res)
-        navigate(`/app/dashboard`, { replace: true })
-      })
-      .catch(err => {
-        setError(err.message)
-      })
+    signUp(user)
+  }
+  if (auth.uid) {
+    navigate("/app/dashboard", { replace: true })
+    return null
   }
   return (
     <React.Fragment>
@@ -58,8 +44,7 @@ const Register = () =>  {
             </Link>
           </div>
           <div className="account-card__content">
-            {user.username && user.email && user.password && <Alert color="success">Registration Done Successfully.</Alert>}
-            {error && <Alert color="danger">{error}</Alert>}
+            {authError && <Alert color="danger">{authError}</Alert>}
             <AvForm className="form-horizontal" onSubmit={handleSubmit}>
               <AvField 
                 name="username" 
@@ -114,7 +99,25 @@ const Register = () =>  {
   );
 }
 
-export default Register;
+
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    auth: state.firebase.auth,
+    authError: state.auth.authError,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp: newUser => dispatch(signUp(newUser)),
+  }
+}
+
+export default connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(Register);
 
 
 

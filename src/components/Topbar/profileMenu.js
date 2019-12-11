@@ -2,11 +2,13 @@ import React, {useState} from "react"
 import { DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { FaUserCircle, FaLock, FaPowerOff } from 'react-icons/fa'
 import { MdSettings } from 'react-icons/md'
+import { connect } from "react-redux"
 
+import { signOut } from '../../store/actions/auth'
 import Image from '../image'
 import NavList from './styles'
 
-const ProfileMenu = () => {
+const ProfileMenu = ({signOut}) => {
   const [toggle, setToggle] = useState(false)
   return(
     <NavList 
@@ -45,9 +47,10 @@ const ProfileMenu = () => {
         </DropdownItem>
         <div className="dropdown-divider" />
         <DropdownItem 
-          tag="a" 
+          tag="button" 
           className="text-danger" 
-          href="/logout">
+          onClick={signOut}
+        >
           <FaPowerOff className="mdi mdi-power text-danger"/> 
           Logout
         </DropdownItem>
@@ -56,4 +59,10 @@ const ProfileMenu = () => {
   )
 }
 
-export default ProfileMenu
+const mapDispatchToProps = dispatch => {
+  return {
+    signOut: () => dispatch(signOut())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ProfileMenu)
