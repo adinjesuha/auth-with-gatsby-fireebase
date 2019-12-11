@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import Layout from "../components/layout"
 import Dashboard from "../components/Routes/Dashboard"
+import CreatePost from '../components/Routes/CreatePost'
 
 const PrivateRoute = ({ component: Component, location, user, ...rest }) => {
   if (!user) {
@@ -14,7 +15,7 @@ const PrivateRoute = ({ component: Component, location, user, ...rest }) => {
   return <Component user={user} {...rest} />
 }
 
-const App = ({auth}) => {
+const App = ({ auth }) => {
   const user = auth.uid
   if(!auth.isLoaded) return <p>Loading...</p>
   else if(!auth.uid){
@@ -25,6 +26,7 @@ const App = ({auth}) => {
     <Layout>
       <Router>
         <PrivateRoute user={user} path="/app/dashboard" component={Dashboard} />
+        <PrivateRoute user={user} path="/app/dashboard/create-post" component={CreatePost} />
       </Router>
     </Layout>
   )

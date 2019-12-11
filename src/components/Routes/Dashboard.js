@@ -1,12 +1,17 @@
 import React from 'react'
-import { Container, Row, Col, Breadcrumb, BreadcrumbItem, Button } from 'reactstrap';
+import { Link } from 'gatsby'
+import { Container, Row, Col, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+
+import { connect } from "react-redux"
+import { firestoreConnect } from "react-redux-firebase"
+import { compose } from "redux"
 
 import SEO from '../seo'
 import { PageTitle } from './styles'
-import CardListing from '../Cards/cardListing'
+import PostList from '../Posts/postList'
 
 
-const Dashboard = () => {
+const Dashboard = ({posts}) => {
   return (
     <Container>
       <SEO title="Dashboard" />
@@ -20,14 +25,26 @@ const Dashboard = () => {
           </Col>
           <Col sm="6">
             <div className="float-right d-none d-md-block">
-              <Button className="btn-primary">Create a post</Button>
+              <Link to="/app/dashboard/create-post" className="btn-primary">Create a post</Link>
             </div>
           </Col>
         </Row>
       </PageTitle>
-      <CardListing />
+      <PostList posts={posts}/>
     </Container>
   )
 }
 
-export default Dashboard
+const mapStateToProps = state => {
+  return {
+    posts: state.firestore.ordered.posts,
+  }
+}
+
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: "posts", orderBy: ["createdAt", "desc"] }
+  ])
+)(Dashboard)

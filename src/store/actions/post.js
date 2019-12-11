@@ -1,0 +1,31 @@
+import { CREATE_POST_SUCCESS, CREATE_POST_ERROR } from './actionTypes'
+
+export const createPost = post => {
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase()
+    const firestore = firebase.firestore()
+    const profile = getState().firebase.profile
+    const authorId = getState().firebase.auth.uid
+    firestore
+      .collection("posts")
+      .add({
+        ...post,
+        username: profile.username,
+        authorId: authorId,
+        createdAt: new Date(),
+        image: `places-${Math.floor(Math.random() * 6) + 1}.jpg`
+      })
+      .then(() => {
+        dispatch({
+          type: CREATE_POST_SUCCESS,
+          post,
+        })
+      })
+      .catch(err => {
+        dispatch({
+          type: CREATE_POST_ERROR,
+          err,
+        })
+      })
+  }
+}

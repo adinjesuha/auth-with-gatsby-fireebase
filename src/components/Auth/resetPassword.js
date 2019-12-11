@@ -38,7 +38,7 @@ const ResetPassword = ({authError, resetMessage, resetPassword}) => {
               label="Email" 
               placeholder="Enter Email" 
               type="email" 
-              value={email} 
+              value={email}
               onChange={handleChange}
               required
             />
