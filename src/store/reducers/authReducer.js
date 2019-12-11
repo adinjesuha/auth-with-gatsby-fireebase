@@ -3,11 +3,14 @@ import {
   SIGNIN_ERROR, 
   SIGNUP_SUCCESS, 
   SIGNUP_ERROR,
-  SIGNOUT_SUCCESS
+  SIGNOUT_SUCCESS,
+  RESET_SUCCESS,
+  RESET_ERROR 
 } from "../actions/actionTypes";
 
 const initState = {
   authError: null,
+  resetMessage: null
 }
 
 const authReducer = (state = initState, action) => {
@@ -39,6 +42,19 @@ const authReducer = (state = initState, action) => {
     case SIGNOUT_SUCCESS:
       console.log("signout success")
       return state
+    case RESET_SUCCESS:
+      console.log("reset password sucsess")
+      return {
+        ...state,
+        authError: null,
+        resetMessage: "Reset email sent. Go check your inbox."
+      }
+    case RESET_ERROR:
+      console.log('reset password error')
+      return{
+        ...state,
+        authError: action.err.message
+      }
     default:
       return state
   }

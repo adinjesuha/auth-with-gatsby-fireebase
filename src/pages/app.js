@@ -7,7 +7,7 @@ import Layout from "../components/layout"
 import Dashboard from "../components/Routes/Dashboard"
 
 const PrivateRoute = ({ component: Component, location, user, ...rest }) => {
-  if (user) {
+  if (!user) {
     navigate(`/`, { replace: true })
     return null
   }
@@ -15,8 +15,12 @@ const PrivateRoute = ({ component: Component, location, user, ...rest }) => {
 }
 
 const App = ({auth}) => {
-  const user = auth.isEmpty
+  const user = auth.uid
   if(!auth.isLoaded) return <p>Loading...</p>
+  else if(!auth.uid){
+    navigate("/", { replace: true })
+    return null
+  }
   return (
     <Layout>
       <Router>

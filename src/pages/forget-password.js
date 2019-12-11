@@ -1,14 +1,14 @@
 import React from "react"
 
 import SEO from "../components/seo"
-import Register from '../components/Auth/register'
+import ResetPassword from '../components/Auth/resetPassword'
 
 
 
 const IndexPage = () => (
   <>
-    <SEO title="Register" />
-    <Register />
+    <SEO title="Reset Password" />
+    <ResetPassword />
   </>
 )
 

@@ -3,7 +3,9 @@ import {
   SIGNIN_ERROR, 
   SIGNUP_SUCCESS, 
   SIGNUP_ERROR,
-  SIGNOUT_SUCCESS
+  SIGNOUT_SUCCESS,
+  RESET_SUCCESS,
+  RESET_ERROR
 } from "./actionTypes";
 
 export const signIn = credentials => {
@@ -53,6 +55,21 @@ export const signOut = () => {
       .signOut()
       .then(() => {
         dispatch({ type: SIGNOUT_SUCCESS })
+      })
+  }
+}
+
+export const resetPassword = email => {
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase()
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        dispatch({ type: RESET_SUCCESS })
+      })
+      .catch(err => {
+        dispatch({type: RESET_ERROR, err})
       })
   }
 }

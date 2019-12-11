@@ -3,7 +3,6 @@ import { Link, navigate } from 'gatsby';
 import { Alert, Button, Col, Row, Card } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { connect } from "react-redux"
-
 import { signIn } from '../../store/actions/auth' 
 
 import Image from '../image'
