@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import { Card, CardBody, CardFooter, Button } from 'reactstrap';
 import { MdModeEdit, MdDelete, MdFavorite } from 'react-icons/md'
 import moment from "moment"
+import { connect } from 'react-redux'
 
+import { deletePost } from '../../store/actions/post'
 import Image from '../image'
 
 const Wrapper = styled(Card)`
@@ -48,9 +50,8 @@ const Wrapper = styled(Card)`
   }
 `
 
-const CardEl = ({postData}) => {
-  console.log(postData)
-  const {title, subtitle, image, createdAt, username} = postData
+const CardEl = ({postData, deletePost}) => {
+  const {title, subtitle, image, createdAt, username, id} = postData
   return (
     <Wrapper>
       <div className="image-card">
@@ -72,7 +73,7 @@ const CardEl = ({postData}) => {
           <Button color="transparent">
             <MdFavorite /> Like
           </Button>
-          <Button color="transparent">
+          <Button color="transparent" onClick={() => deletePost(id)}>
             <MdDelete /> Delete
           </Button>
         </div>
@@ -81,5 +82,13 @@ const CardEl = ({postData}) => {
   )
 }
 
+const mapToDispatchProps = dispatch => {
+  return {
+    deletePost: postId => dispatch(deletePost(postId))
+  }
+}
 
-export default CardEl
+export default connect(
+  null, 
+  mapToDispatchProps
+)(CardEl)

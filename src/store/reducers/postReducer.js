@@ -1,4 +1,9 @@
-import { CREATE_POST_SUCCESS, CREATE_POST_ERROR } from '../actions/actionTypes'
+import { 
+  CREATE_POST_SUCCESS, 
+  CREATE_POST_ERROR,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR,
+} from '../actions/actionTypes'
 
 const initState = {
   posts: [
@@ -45,6 +50,11 @@ const postReducer = (state = initState, action) => {
     case CREATE_POST_ERROR:
       console.log("create post error", action.err)
       return state
+    case DELETE_POST_SUCCESS:
+      console.log("delete post success")
+      return state
+    case DELETE_POST_ERROR:
+      console.log("delete post error", action.err)
     default:
       return state
   }

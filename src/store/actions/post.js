@@ -1,4 +1,9 @@
-import { CREATE_POST_SUCCESS, CREATE_POST_ERROR } from './actionTypes'
+import { 
+  CREATE_POST_SUCCESS, 
+  CREATE_POST_ERROR,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_ERROR
+} from './actionTypes'
 
 export const createPost = post => {
   return (dispatch, getState, getFirebase) => {
@@ -28,4 +33,25 @@ export const createPost = post => {
         })
       })
   }
+}
+export const deletePost = postId => {
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase()
+    const firestore = firebase.firestore()
+    firestore
+      .collection("posts")
+      .doc(postId)
+      .delete()
+      .then(() => {
+        dispatch({
+          type: DELETE_POST_SUCCESS
+        })
+      })
+      .catch(err => {
+        dispatch({
+          type: DELETE_POST_ERROR,
+          err
+        })
+      })
+    }
 }
