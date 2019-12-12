@@ -16,6 +16,10 @@ const Wrapper = styled.div`
 const ContentPage = styled.div`
   margin-left: 240px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
   .content{
     padding: 0 15px 10px;
     margin-top: 70px;

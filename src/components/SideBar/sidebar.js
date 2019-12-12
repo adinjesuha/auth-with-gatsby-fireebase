@@ -20,7 +20,7 @@ const Wrapper = styled.div`
       text-transform: uppercase;
       color:#b4bfcc;
     }
-    a {
+    a{
       color: #8699ad;
       font-size: 15.7px;
       display: block;
@@ -31,6 +31,9 @@ const Wrapper = styled.div`
       justify-content: space-between;
       svg {
         margin-right: 8px;
+      }
+      &:active{
+        outline: none;
       }
       &:hover{
         color: #b4c9de;
@@ -56,40 +59,20 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <Link 
-            to="/app/" 
-            activeClassName="active-link">
-            <span>Listings</span>
+          <a href="#">
+            <span>Places</span>
             <span className="badge badge-success badge-pill">6</span>
-          </Link>
+          </a>
         </li>
         <li>
-          <Link 
-            to="/app/" 
-            activeClassName="active-link">
-            <span>Providers</span>
-          </Link>
+          <a href="#">
+            <span>Travels</span>
+          </a>
         </li>
         <li>
-          <Link 
-            to="/app/" 
-            activeClassName="active-link">
+          <a href="#">
             <span>Users</span>
-          </Link>
-        </li>
-        <li>
-          <Link 
-            to="/app/" 
-            activeClassName="active-link">
-            <span>Billing</span>
-          </Link>
-        </li>
-        <li>
-          <Link 
-            to="/app/" 
-            activeClassName="active-link">
-            <span>Settings</span>
-          </Link>
+          </a>
         </li>
       </ul>
     </Wrapper>

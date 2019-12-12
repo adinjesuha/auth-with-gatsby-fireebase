@@ -19,7 +19,7 @@ const Wrapper = styled(Card)`
   }
   .card-body{
     .card-text{
-      color: #9ea0a5;
+      /* color: #9ea0a5; */
     }
   }
   .card-footer{
@@ -67,8 +67,8 @@ const CardEl = ({postData, deletePost}) => {
       <CardBody>
         <h4 className="card-title font-16 mt-0">{title}</h4>
         <p className="card-text">{subtitle}</p>
-        <p className="card-text">Author: {username}</p>
         <p className="card-text">
+          By: {username} <br />
           <small className="text-muted">{moment(createdAt.toDate().toString()).calendar()}</small>
         </p>
       </CardBody>

@@ -5,6 +5,7 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { connect } from "react-redux"
 
 import { createPost } from '../../store/actions/post'
+import PageTitle from '../PageTitle'
 
 const CreatePost = ({createPost}) => {
   const [post, setPost] = useState({
@@ -22,35 +23,37 @@ const CreatePost = ({createPost}) => {
     navigate("/app/dashboard", { replace: true })
   }
   return (
-    <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit}>
-      <h5>Create new project</h5>
-      <AvField 
-        type="text" 
-        name="title"
-        label="Title" 
-        placeholder="Enter title" 
-        value={post.title} 
-        onChange={handleChange}
-        maxLength="20"
-        required
-      />
-      <AvField 
-        type="text" 
-        name="subtitle"
-        label="Sub title" 
-        placeholder="Enter Sub title" 
-        value={post.content} 
-        onChange={handleChange}
-        maxLength="35"
-        required
-      />
-      <Button 
-        className="btn-primary waves-effect waves-light" 
-        type="submit"
-      >
-        Create
-      </Button>
-    </AvForm>
+    <>
+      <PageTitle title="Create a Post" breadcrumb="Add new content"/>
+      <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit}>
+        <AvField 
+          type="text" 
+          name="title"
+          label="Title" 
+          placeholder="Enter title" 
+          value={post.title} 
+          onChange={handleChange}
+          maxLength="20"
+          required
+        />
+        <AvField 
+          type="text" 
+          name="subtitle"
+          label="Sub title" 
+          placeholder="Enter Sub title" 
+          value={post.content} 
+          onChange={handleChange}
+          maxLength="35"
+          required
+        />
+        <Button 
+          className="btn-primary waves-effect waves-light" 
+          type="submit"
+        >
+          Create
+        </Button>
+      </AvForm>
+    </>
   )
 }
 

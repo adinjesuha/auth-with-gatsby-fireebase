@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { navigate } from "gatsby"
 import { Button } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
@@ -8,13 +8,17 @@ import { firestoreConnect } from "react-redux-firebase"
 import { compose } from "redux"
 
 import { editPost } from '../../store/actions/post'
+import PageTitle from '../PageTitle'
 
 const EditPost = ({post, postId, editPost}) => {
-  const [editedPost, setEditedPost] = useState({
-    title: post.title,
-    subtitle: post.subtitle,
-    id: postId
-  })
+  const [editedPost, setEditedPost] = useState({title: null, subtitle: null, id: null})
+  useEffect(() => {
+    setEditedPost({
+      title: post.title,
+      subtitle: post.subtitle,
+      id: postId
+    })
+  },[])
   const handleChange = e => {
     setEditedPost({
       ...editedPost,
@@ -27,33 +31,35 @@ const EditPost = ({post, postId, editPost}) => {
   }
   if(!post) return  <p>Loading...</p>
   return (
-    <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit}>
-      <h5>Edit the post</h5>
-      <AvField 
-        type="text" 
-        name="title"
-        label="Title" 
-        defaultValue={post.title}
-        onChange={handleChange}
-        maxLength="20"
-        required
-      />
-      <AvField 
-        type="text" 
-        name="subtitle"
-        label="Sub title" 
-        defaultValue={post.subtitle}
-        onChange={handleChange}
-        maxLength="35"
-        required
-      />
-      <Button 
-        className="btn-primary waves-effect waves-light" 
-        type="submit"
-      >
-        Update
-      </Button>
-    </AvForm>
+    <>
+    <PageTitle title="Edit a Post" breadcrumb="Edit you own content"/>
+      <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit}>
+        <AvField 
+          type="text"
+          name="title"
+          label="Title" 
+          defaultValue={post.title}
+          onChange={handleChange}
+          maxLength="20"
+          required
+        />
+        <AvField 
+          type="text" 
+          name="subtitle"
+          label="Sub title" 
+          defaultValue={post.subtitle}
+          onChange={handleChange}
+          maxLength="35"
+          required
+        />
+        <Button 
+          className="btn-primary waves-effect waves-light" 
+          type="submit"
+        >
+          Update
+        </Button>
+      </AvForm>
+    </>
   )
 }
 
