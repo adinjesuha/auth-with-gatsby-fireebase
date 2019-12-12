@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import Layout from "../components/layout"
 import Dashboard from "../components/Routes/Dashboard"
 import CreatePost from '../components/Routes/CreatePost'
+import EditPost from '../components/Routes/EditPost'
 
 const PrivateRoute = ({ component: Component, location, user, ...rest }) => {
   if (!user) {
@@ -27,6 +28,7 @@ const App = ({ auth }) => {
       <Router>
         <PrivateRoute user={user} path="/app/dashboard" component={Dashboard} />
         <PrivateRoute user={user} path="/app/dashboard/create-post" component={CreatePost} />
+        <PrivateRoute user={user} path="/app/dashboard/edit-post/:id" component={EditPost} />
       </Router>
     </Layout>
   )

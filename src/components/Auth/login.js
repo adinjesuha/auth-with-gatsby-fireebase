@@ -23,7 +23,6 @@ const Login = ({auth, authError, signIn}) =>  {
   }
   
   const handleSubmit = e => {
-    e.preventDefault()
     signIn(user)
   }
   if (auth.uid) {

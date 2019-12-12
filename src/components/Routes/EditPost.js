@@ -1,0 +1,82 @@
+import React, { useState } from "react"
+import { navigate } from "gatsby"
+import { Button } from 'reactstrap';
+import { AvForm, AvField } from 'availity-reactstrap-validation';
+
+import { connect } from "react-redux"
+import { firestoreConnect } from "react-redux-firebase"
+import { compose } from "redux"
+
+import { editPost } from '../../store/actions/post'
+
+const EditPost = ({post, postId, editPost}) => {
+  const [editedPost, setEditedPost] = useState({
+    title: post.title,
+    subtitle: post.subtitle,
+    id: postId
+  })
+  const handleChange = e => {
+    setEditedPost({
+      ...editedPost,
+      [e.target.name]: e.target.value
+    })
+  }
+  const handleSubmit = e => {
+    editPost(editedPost)
+    navigate("/app/dashboard", { replace: true })
+  }
+  if(!post) return  <p>Loading...</p>
+  return (
+    <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit}>
+      <h5>Edit the post</h5>
+      <AvField 
+        type="text" 
+        name="title"
+        label="Title" 
+        defaultValue={post.title}
+        onChange={handleChange}
+        maxLength="20"
+        required
+      />
+      <AvField 
+        type="text" 
+        name="subtitle"
+        label="Sub title" 
+        defaultValue={post.subtitle}
+        onChange={handleChange}
+        maxLength="35"
+        required
+      />
+      <Button 
+        className="btn-primary waves-effect waves-light" 
+        type="submit"
+      >
+        Update
+      </Button>
+    </AvForm>
+  )
+}
+
+const mapStateToProps = (state, ownProps) => {
+  const id = ownProps.id
+  const { posts } = state.firestore.data
+  const post = posts ? posts[id] : null
+  return {
+    post,
+    postId: ownProps.id
+  }
+}
+
+const mapToDispatchPorps = dispatch => {
+  return{
+    editPost: post => dispatch(editPost(post))
+  }
+}
+
+export default compose(
+  connect(
+    mapStateToProps, 
+    mapToDispatchPorps
+  ),
+  firestoreConnect([{ collection: "projects" }])
+)(EditPost)

@@ -31,15 +31,17 @@ const CreatePost = ({createPost}) => {
         placeholder="Enter title" 
         value={post.title} 
         onChange={handleChange}
+        maxLength="20"
         required
       />
       <AvField 
         type="text" 
         name="subtitle"
         label="Sub title" 
-        placeholder="Enter Sub-title" 
+        placeholder="Enter Sub title" 
         value={post.content} 
         onChange={handleChange}
+        maxLength="35"
         required
       />
       <Button 

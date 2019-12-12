@@ -25,7 +25,6 @@ const Register = ({auth, authError, signUp}) =>  {
   }
   
   const handleSubmit = e => {
-    e.preventDefault()
     signUp(user)
   }
   if (auth.uid) {

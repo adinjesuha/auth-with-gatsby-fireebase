@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 import { Card, CardBody, CardFooter, Button } from 'reactstrap';
 import { MdModeEdit, MdDelete, MdFavorite } from 'react-icons/md'
@@ -26,7 +27,12 @@ const Wrapper = styled(Card)`
     padding: 0;
     .actions-group{
       display: flex;
-      button{
+      a{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      button, a{
         font-size: 14px;
         width: 100%;
         border-radius: 0;
@@ -51,6 +57,7 @@ const Wrapper = styled(Card)`
 `
 
 const CardEl = ({postData, deletePost}) => {
+  const [ isFavorite, setFavorite ] = useState(false);
   const {title, subtitle, image, createdAt, username, id} = postData
   return (
     <Wrapper>
@@ -67,14 +74,23 @@ const CardEl = ({postData, deletePost}) => {
       </CardBody>
       <CardFooter>
         <div className="actions-group">
-          <Button color="transparent">
-            <MdModeEdit /> Edit
-          </Button>
-          <Button color="transparent">
-            <MdFavorite /> Like
+          <Link to={`/app/dashboard/edit-post/${id}`}>
+            <span>
+              <MdModeEdit /> 
+              Edit
+            </span>
+          </Link>
+          <Button color="transparent" onClick={() => setFavorite(!isFavorite)}>
+            <span>
+              <MdFavorite style={{color: isFavorite ? 'red' : 'inherit'}}/> 
+              Like
+            </span>
           </Button>
           <Button color="transparent" onClick={() => deletePost(id)}>
-            <MdDelete /> Delete
+            <span>
+              <MdDelete /> 
+              Delete
+            </span>
           </Button>
         </div>
       </CardFooter>
