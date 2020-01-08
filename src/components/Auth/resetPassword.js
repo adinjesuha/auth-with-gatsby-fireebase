@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, navigate } from 'gatsby';
+import { Link } from 'gatsby';
 import { Alert, Button, Col, Row, Card } from 'reactstrap';
 import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { connect } from "react-redux"

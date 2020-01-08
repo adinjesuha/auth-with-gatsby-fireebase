@@ -33,7 +33,6 @@ const CreatePost = ({createPost}) => {
           placeholder="Enter title" 
           value={post.title} 
           onChange={handleChange}
-          maxLength="20"
           required
         />
         <AvField 
@@ -43,7 +42,6 @@ const CreatePost = ({createPost}) => {
           placeholder="Enter Sub title" 
           value={post.content} 
           onChange={handleChange}
-          maxLength="35"
           required
         />
         <Button 

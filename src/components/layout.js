@@ -1,8 +1,8 @@
 import React from "react"
 import styled from 'styled-components'
 
-import Tobar from './topbar/topbar'
-import Sidebar from './SideBar/sidebar'
+import Tobar from './topbar/'
+import Sidebar from './SideBar/'
 import "../styles/bootstrap.min.css"
 import "../styles/layout.css"
 import Footer from "./footer"

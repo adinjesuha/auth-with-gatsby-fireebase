@@ -18,7 +18,7 @@ const EditPost = ({post, postId, editPost}) => {
       subtitle: post.subtitle,
       id: postId
     })
-  },[])
+  },[post, postId])
   const handleChange = e => {
     setEditedPost({
       ...editedPost,
