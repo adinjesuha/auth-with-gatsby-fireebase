@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 import Tobar from './Topbar/'
 import Sidebar from './SideBar/'
-import "../bootstrap.min.css"
-import "../layout.css"
+import "./bootstrap.min.css"
+import "./layout.css"
 import Footer from "./footer"
 
 const Wrapper = styled.div`
