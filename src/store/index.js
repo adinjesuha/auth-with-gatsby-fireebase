@@ -32,7 +32,7 @@ const rrfProps = {
     useFirestoreForProfile: true,
   },
   dispatch: store.dispatch,
-  createFirestoreInstance // <- needed if using firestore
+  createFirestoreInstance 
 }
 
 export default ({ element }) => (

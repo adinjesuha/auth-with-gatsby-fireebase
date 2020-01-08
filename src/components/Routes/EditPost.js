@@ -31,7 +31,7 @@ const EditPost = ({post, postId, editPost}) => {
   }
   if(!post) return  <p>Loading...</p>
   return (
-    <>
+    <React.Fragment>
     <PageTitle title="Edit a Post" breadcrumb="Edit you own content"/>
       <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit}>
         <AvField 
@@ -59,7 +59,7 @@ const EditPost = ({post, postId, editPost}) => {
           Update
         </Button>
       </AvForm>
-    </>
+    </React.Fragment>
   )
 }
 
