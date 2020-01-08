@@ -38,7 +38,7 @@ const ButtonLink = styled(Link)`
   }
 `
 
-const PageTitle = ({title, breadcrumb}) => {
+const Title = ({title, breadcrumb}) => {
   return (
     <Wrapper className="page-title-box">
       <Row className="align-items-center">
@@ -63,4 +63,4 @@ const PageTitle = ({title, breadcrumb}) => {
   )
 }
 
-export default PageTitle
+export default Title

@@ -5,7 +5,7 @@ import { firestoreConnect } from "react-redux-firebase"
 import { compose } from "redux"
 
 import SEO from '../seo'
-import PageTitle from '../pageTitle'
+import PageTitle from '../title'
 import PostList from '../Posts/postList'
 
 
