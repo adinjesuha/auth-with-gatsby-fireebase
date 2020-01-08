@@ -5,7 +5,7 @@ import { AvForm, AvField } from 'availity-reactstrap-validation';
 import { connect } from "react-redux"
 
 import { createPost } from '../../store/actions/post'
-import PageTitle from '../PageTitle'
+import PageTitle from '../pageTitle'
 
 const CreatePost = ({createPost}) => {
   const [post, setPost] = useState({

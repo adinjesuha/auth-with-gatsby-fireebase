@@ -20,7 +20,10 @@ const Wrapper = styled.div`
       text-transform: uppercase;
       color:#b4bfcc;
     }
-    a{
+    p{
+      margin:0
+    }
+    a, p{
       color: #8699ad;
       font-size: 15.7px;
       display: block;
@@ -59,20 +62,20 @@ const Sidebar = () => {
           </Link>
         </li>
         <li>
-          <a href="#">
+          <p>
             <span>Places</span>
             <span className="badge badge-success badge-pill">6</span>
-          </a>
+          </p>
         </li>
         <li>
-          <a href="#">
+          <p>
             <span>Travels</span>
-          </a>
+          </p>
         </li>
         <li>
-          <a href="#">
+          <p>
             <span>Users</span>
-          </a>
+          </p>
         </li>
       </ul>
     </Wrapper>

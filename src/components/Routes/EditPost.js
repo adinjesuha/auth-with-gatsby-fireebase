@@ -8,7 +8,7 @@ import { firestoreConnect } from "react-redux-firebase"
 import { compose } from "redux"
 
 import { editPost } from '../../store/actions/post'
-import PageTitle from '../PageTitle'
+import PageTitle from '../pageTitle'
 
 const EditPost = ({post, postId, editPost}) => {
   const [editedPost, setEditedPost] = useState({title: null, subtitle: null, id: null})
