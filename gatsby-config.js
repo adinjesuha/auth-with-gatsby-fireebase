@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Gatsby Dashboad`,
     description: `Gatsby dashboard template app.`,
-    author: `@gatsbyjs`,
+    author: `@adinjesuha`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
