@@ -7,18 +7,20 @@ import { compose } from "redux"
 import SEO from '../seo'
 import PageTitle from '../title'
 import PostList from '../Posts/postList'
-
+import Layout from '../layout'
 
 const Dashboard = ({posts}) => {
   return (
-    <Container>
-      <SEO title="Dashboard" />
-      <PageTitle 
-        title="Dashboard"
-        breadcrumb="Welcome to Gatsby with Firebase App"
-      />
-      <PostList posts={posts}/>
-    </Container>
+    <Layout>
+      <Container>
+        <SEO title="Dashboard" />
+        <PageTitle 
+          title="Dashboard"
+          breadcrumb="Welcome to Gatsby with Firebase App"
+        />
+        <PostList posts={posts}/>
+      </Container>
+    </Layout>
   )
 }
 
@@ -27,7 +29,6 @@ const mapStateToProps = state => {
     posts: state.firestore.ordered.posts,
   }
 }
-
 
 export default compose(
   connect(mapStateToProps),

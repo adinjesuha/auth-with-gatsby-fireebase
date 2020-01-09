@@ -8,7 +8,6 @@ import { signIn } from '../../store/actions/auth'
 import Image from '../image'
 import Wrapper from './styles'
 import { MdFavorite, MdHttps } from "react-icons/md";
-import "../Css/bootstrap.min.css"
 
 const Login = ({auth, authError, signIn}) =>  {
   const [user, setUser] = useState({

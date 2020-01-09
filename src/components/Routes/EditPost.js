@@ -9,6 +9,8 @@ import { compose } from "redux"
 
 import { editPost } from '../../store/actions/post'
 import PageTitle from '../title'
+import Layout from '../layout'
+
 
 const EditPost = ({post, postId, editPost}) => {
   const [editedPost, setEditedPost] = useState({title: null, subtitle: null, id: null})
@@ -31,8 +33,8 @@ const EditPost = ({post, postId, editPost}) => {
   }
   if(!post) return  <p>Loading...</p>
   return (
-    <React.Fragment>
-    <PageTitle title="Edit a Post" breadcrumb="Edit you own content"/>
+    <Layout>
+      <PageTitle title="Edit a Post" breadcrumb="Edit you own content"/>
       <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit}>
         <AvField 
           type="text"
@@ -59,7 +61,7 @@ const EditPost = ({post, postId, editPost}) => {
           Update
         </Button>
       </AvForm>
-    </React.Fragment>
+    </Layout>
   )
 }
 

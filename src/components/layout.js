@@ -1,12 +1,13 @@
 import React from "react"
 import styled from 'styled-components'
+import { connect } from "react-redux";
 
 import Tobar from './Topbar/'
 import Sidebar from './SideBar/'
 import Footer from "./footer"
 
-import "./Css/layout.css"
 import "./Css/bootstrap.min.css"
+import "./Css/layout.css"
 
 const Wrapper = styled.div`
   height: 100%;
@@ -28,8 +29,10 @@ const ContentPage = styled.div`
   }
 `
 
-const Layout = ({ children }) => {
-
+const Layout = ({ children, auth }) => {
+  if(!auth.uid){
+    return <React.Fragment>{children}</React.Fragment>
+  }
   return (
     <Wrapper>
       <Tobar />
@@ -42,4 +45,11 @@ const Layout = ({ children }) => {
   )
 }
 
-export default Layout
+function mapStateToProps(state) {
+  return {
+    auth: state.firebase.auth
+  };
+}
+
+export default connect(mapStateToProps)(Layout)
+

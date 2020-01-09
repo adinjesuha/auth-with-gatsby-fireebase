@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 
 import { createPost } from '../../store/actions/post'
 import PageTitle from '../title'
+import Layout from '../layout'
 
 const CreatePost = ({createPost}) => {
   const [post, setPost] = useState({
@@ -23,7 +24,7 @@ const CreatePost = ({createPost}) => {
     navigate("/app/dashboard", { replace: true })
   }
   return (
-    <>
+    <Layout>
       <PageTitle title="Create a Post" breadcrumb="Add new content"/>
       <AvForm className="form-horizontal m-t-30" onSubmit={handleSubmit}>
         <AvField 
@@ -51,7 +52,7 @@ const CreatePost = ({createPost}) => {
           Create
         </Button>
       </AvForm>
-    </>
+    </Layout>
   )
 }
 

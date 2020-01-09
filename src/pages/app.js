@@ -3,7 +3,6 @@ import { Router } from "@reach/router"
 import { navigate } from "gatsby"
 import { connect } from "react-redux";
 
-import Layout from "../components/layout"
 import Dashboard from "../components/Routes/Dashboard"
 import CreatePost from '../components/Routes/CreatePost'
 import EditPost from '../components/Routes/EditPost'
@@ -24,13 +23,11 @@ const App = ({ auth }) => {
     return null
   }
   return (
-    <Layout>
-      <Router>
-        <PrivateRoute user={user} path="/app/dashboard" component={Dashboard} />
-        <PrivateRoute user={user} path="/app/dashboard/create-post" component={CreatePost} />
-        <PrivateRoute user={user} path="/app/dashboard/edit-post/:id" component={EditPost} />
-      </Router>
-    </Layout>
+    <Router>
+      <PrivateRoute user={user} path="/app/dashboard" component={Dashboard} />
+      <PrivateRoute user={user} path="/app/dashboard/create-post" component={CreatePost} />
+      <PrivateRoute user={user} path="/app/dashboard/edit-post/:id" component={EditPost} />
+    </Router>
   )
 }
 
