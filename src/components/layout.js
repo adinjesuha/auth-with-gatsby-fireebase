@@ -3,9 +3,10 @@ import styled from 'styled-components'
 
 import Tobar from './Topbar/'
 import Sidebar from './SideBar/'
-import "./bootstrap.min.css"
-import "./layout.css"
 import Footer from "./footer"
+
+import "./Css/layout.css"
+import "./Css/bootstrap.min.css"
 
 const Wrapper = styled.div`
   height: 100%;

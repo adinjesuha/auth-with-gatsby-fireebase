@@ -6,8 +6,9 @@ import { connect } from "react-redux"
 import { signIn } from '../../store/actions/auth' 
 
 import Image from '../image'
-import { MdFavorite, MdHttps } from "react-icons/md";
 import Wrapper from './styles'
+import { MdFavorite, MdHttps } from "react-icons/md";
+import "../Css/bootstrap.min.css"
 
 const Login = ({auth, authError, signIn}) =>  {
   const [user, setUser] = useState({
